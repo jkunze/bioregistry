@@ -7,6 +7,7 @@ import json
 import click
 import yaml
 from pystow.utils import download
+from tqdm import tqdm
 
 from bioregistry.constants import EXTERNAL
 
@@ -62,7 +63,7 @@ def _process(entry):
         elif download_url_suffix.endswith(".obo"):
             rv["download_obo"] = f"http://aber-owl.net/{download_url_suffix}"
         else:
-            pass  # what's going on here?
+            tqdm.write(f"Unhandled ontology extension: {download_url_suffix}")
     return {k: v for k, v in rv.items() if k and v}
 
 
