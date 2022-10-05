@@ -139,6 +139,18 @@ class Manager:
         self.provided_by = dict(provided_by)
         self.has_parts = dict(has_parts)
 
+    def add_resource(self, resource: Resurce):
+        """Add a resource to the default registry during current runtime."""
+        if resource in self.registry:
+            raise KeyError
+        self.registry[resource.prefix] = resource
+        if resource.has_canonical:
+            self.canonical_for.setdefault(resource.has_canonical, []).append(prefix)
+        if resource.provides:
+            self.provided_by.setdefault(resource.provides, []).append(prefix)
+        if resource.part_of:
+            self.has_parts.setdefault(resource.part_of, []).append(prefix)
+
     def write_registry(self):
         """Write the registry."""
         write_registry(self.registry)
