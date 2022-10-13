@@ -1,0 +1,18 @@
+% The purpose of this document is to make showing all of the auto-generated tables easier.
+
+\documentclass[8pt]{article}
+\usepackage[utf8]{inputenc}
+% \usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage{lineno}
+\usepackage{multirow}
+\usepackage{lscape}
+
+\begin{document}
+    \input{summary.tex}
+    \begin{landscape}
+        \small
+        \input{comparison_metadata.tex}
+        \input{comparison_goveranance.tex}
+    \end{landscape}
+\end{document}
