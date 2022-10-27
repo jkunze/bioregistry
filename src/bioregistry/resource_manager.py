@@ -171,10 +171,13 @@ class Manager:
 
     def get_registry_provider_uri_format(self, metaprefix: str, prefix: str) -> Optional[str]:
         """Get the URL for the resource inside registry, if available."""
-        entry = self.get_registry(metaprefix)
-        if entry is None:
+        registry = self.get_registry(metaprefix)
+        if registry is None:
             return None
-        return entry.get_provider_uri_format(prefix)
+        resource = self.registry[registry.bioregistry_prefix]
+        if registry.provider_uri_format != resource.uri_format:
+            raise ValueError(f"conflict: {registry.provider_uri_format} and {resource.uri_format}")
+        return registry.get_provider_uri_format(prefix)
 
     def normalize_prefix(self, prefix: str) -> Optional[str]:
         """Get the normalized prefix, or return None if not registered.

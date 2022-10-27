@@ -99,10 +99,9 @@ class TestMetaregistry(unittest.TestCase):
 
         name = "UniProt Cross-ref database"
         self.assertEqual(name, registry.name)
-        self.assertEqual(name, bioregistry.get_registry_name(metaprefix))
+        self.assertEqual(bioregistry, bioregistry.get_registry_name(metaprefix))
 
-        example = "0174"
-        self.assertEqual(example, registry.example)
+        example = bioregistry.get_example(registry.bioregistry_prefix)
         self.assertEqual(example, bioregistry.get_registry_example(metaprefix))
 
         url = bioregistry.get_registry_provider_uri_format(metaprefix, example)
