@@ -50,6 +50,7 @@ def _get_resource_mapping_rows(resource: Resource) -> List[Mapping[str, Any]]:
             xref=xref,
             homepage=manager.get_registry_homepage(metaprefix),
             name=manager.get_registry_name(metaprefix),
+            short_name=manager.get_registry_short_name(metaprefix),
             uri=manager.get_registry_provider_uri_format(metaprefix, xref),
         )
         for metaprefix, xref in resource.get_mappings().items()
